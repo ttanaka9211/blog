@@ -13,8 +13,21 @@ class CreatePosts extends AbstractMigration
      * @return void
      */
     public function change()
-    {
-        $table = $this->table('posts');
-        $table->create();
-    }
+{
+    $table = $this->table('posts');
+    $table->addColumn('title', 'string', [
+            'limit' => 150,
+            'null' => false,
+        ])
+        ->addColumn('description', 'text', [
+            'limit' => 255,
+        ])
+        ->addColumn('body', 'text')
+        ->addColumn('published', 'boolean', [
+            'default' => false,
+        ])
+        ->addColumn('created', 'datetime')
+        ->addColumn('modified', 'datetime')
+        ->create();
+}
 }
